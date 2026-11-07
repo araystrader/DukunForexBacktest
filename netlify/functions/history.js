@@ -1,9 +1,10 @@
+const { getHistoricalRates } = require('dukascopy-node');
+
 const allowedInstruments = new Set(['xauusd', 'eurusd', 'btcusd']);
 const allowedTimeframes = new Set(['m1', 'm5', 'm15', 'h1', 'd1']);
 const dateRE = /^\d{4}-\d{2}-\d{2}$/;
 
 exports.handler = async (event) => {
-  const { getHistoricalRates } = await import('dukascopy-node');
   const q = event.queryStringParameters || {};
   const from = q.from || '';
   const to = q.to || '';
