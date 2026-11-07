@@ -1,18 +1,22 @@
-# Terbitkan Backtest Studio di Netlify
+# DukunForex Backtest Studio — Netlify
 
-Paket ini sudah berisi halaman web dan Netlify Function untuk mengambil histori Dukascopy bertahap. **Jangan mengunggah `index.html` saja**; Netlify harus menerima seluruh proyek agar fungsi API ikut terpasang.
+Paket berisi halaman simulator dan fungsi backend Dukascopy. Unggah seluruh isinya; halaman saja tidak bisa mengambil histori.
 
-## Sekali saja: GitHub → Netlify
+## Deploy melalui GitHub
+1. Ekstrak ZIP.
+2. Unggah seluruh isi proyek ke root repository GitHub, termasuk `site/`, `netlify/`, `netlify.toml`, `package.json`, dan `package-lock.json`.
+3. Hubungkan repository ke Netlify atau pastikan situs yang ada sudah terhubung ke repository tersebut.
+4. Build command biarkan kosong. `netlify.toml` mengatur publish folder `site` dan functions `netlify/functions`.
+5. Commit perubahan dan tunggu deploy berstatus Published.
 
-1. Unduh dan ekstrak `Backtest-Studio-Netlify.zip`.
-2. Di GitHub, buat repository baru bernama `backtest-studio`.
-3. Pada repo, pilih **Add file → Upload files**. Unggah isi folder proyek, termasuk folder `site/`, folder `netlify/functions/`, serta `package.json`, `package-lock.json`, dan `netlify.toml`. Tekan **Commit changes**.
-4. Di Netlify, pilih **Add new site → Import an existing project → GitHub**, beri izin mengakses repo `backtest-studio`, lalu pilih repo itu.
-5. Biarkan build command kosong; pengaturan `netlify.toml` sudah menunjuk folder publik dan function. Tekan **Deploy site**.
-6. Buka URL `*.netlify.app` yang diberikan Netlify. URL yang sama dapat dibuka di PC dan browser HP.
+Struktur yang wajib ada:
+```
+netlify.toml
+package.json
+package-lock.json
+site/index.html
+site/logo-dukunforex.jpeg
+netlify/functions/history.js
+```
 
-## Penting
-- Jangan memilih drag-and-drop hanya untuk `site/index.html`: backend function tidak ikut terbit.
-- Pengunduhan M1 untuk 2025-01-01–2026-11-01 dilakukan per bulan agar lebih terkelola. Koneksi Dukascopy atau batas fungsi Netlify dapat membuat sebagian bulan gagal; tombol dapat dicoba ulang.
-- Netlify Free memiliki batas penggunaan dan waktu fungsi. Jika histori lengkap terlalu berat, gunakan rentang lebih pendek atau naikkan paket hosting.
-- Harga Dukascopy tidak selalu sama dengan broker Anda.
+Data M1 diminta per bulan untuk mengurangi beban fungsi. Histori memakai UTC dan feed Dukascopy, yang dapat berbeda dari broker. Netlify gratis dapat membatasi waktu dan pemakaian function.

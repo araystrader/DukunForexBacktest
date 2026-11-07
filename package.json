@@ -1,7 +1,6 @@
 {
   "name": "xauusd-backtest-studio",
   "private": true,
-  "type": "module",
   "engines": {"node": ">=20"},
   "scripts": {"start": "node server.mjs", "fetch:history": "node fetch-history.mjs"},
   "dependencies": {"dukascopy-node": "^1.51.1"}
